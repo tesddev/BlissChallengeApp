@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1CC2EA67CE5875B39AAE5D93 /* Pods_BlissChallengeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC50DE8220B1D2272B8FEC8 /* Pods_BlissChallengeApp.framework */; };
 		82C47C72289860D7000A31B4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C71289860D6000A31B4 /* Helpers.swift */; };
+		82C47C75289872A7000A31B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C74289872A7000A31B4 /* NetworkManager.swift */; };
+		82C47C77289872C4000A31B4 /* AppAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C76289872C4000A31B4 /* AppAPI.swift */; };
+		82C47C7A2898730F000A31B4 /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C792898730F000A31B4 /* EmojiModel.swift */; };
+		82C47C7D289873E1000A31B4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C7C289873E1000A31B4 /* AppButton.swift */; };
 		82E4DE2C28984D9F00B118F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE2B28984D9F00B118F1 /* AppDelegate.swift */; };
 		82E4DE2E28984D9F00B118F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE2D28984D9F00B118F1 /* SceneDelegate.swift */; };
 		82E4DE3028984D9F00B118F1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE2F28984D9F00B118F1 /* HomeViewController.swift */; };
@@ -22,6 +26,10 @@
 		23A2AF4D5D3C6ED8EF40F46B /* Pods-BlissChallengeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlissChallengeApp.debug.xcconfig"; path = "Target Support Files/Pods-BlissChallengeApp/Pods-BlissChallengeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5FC50DE8220B1D2272B8FEC8 /* Pods_BlissChallengeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlissChallengeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82C47C71289860D6000A31B4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		82C47C74289872A7000A31B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		82C47C76289872C4000A31B4 /* AppAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAPI.swift; sourceTree = "<group>"; };
+		82C47C792898730F000A31B4 /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
+		82C47C7C289873E1000A31B4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		82E4DE2828984D9F00B118F1 /* BlissChallengeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlissChallengeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E4DE2B28984D9F00B118F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82E4DE2D28984D9F00B118F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +54,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		82C47C7328987275000A31B4 /* NetworkManagers */ = {
+			isa = PBXGroup;
+			children = (
+				82C47C74289872A7000A31B4 /* NetworkManager.swift */,
+				82C47C76289872C4000A31B4 /* AppAPI.swift */,
+			);
+			path = NetworkManagers;
+			sourceTree = "<group>";
+		};
+		82C47C78289872FB000A31B4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				82C47C792898730F000A31B4 /* EmojiModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		82C47C7B289873C5000A31B4 /* Reusables */ = {
+			isa = PBXGroup;
+			children = (
+				82C47C7C289873E1000A31B4 /* AppButton.swift */,
+			);
+			path = Reusables;
+			sourceTree = "<group>";
+		};
 		82E4DE1F28984D9F00B118F1 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +100,9 @@
 		82E4DE2A28984D9F00B118F1 /* BlissChallengeApp */ = {
 			isa = PBXGroup;
 			children = (
+				82C47C7B289873C5000A31B4 /* Reusables */,
+				82C47C78289872FB000A31B4 /* Models */,
+				82C47C7328987275000A31B4 /* NetworkManagers */,
 				82E4DE422898599A00B118F1 /* Delegates */,
 				82E4DE44289859C400B118F1 /* ViewControllers */,
 				82E4DE43289859B300B118F1 /* Views */,
@@ -244,6 +280,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82C47C7A2898730F000A31B4 /* EmojiModel.swift in Sources */,
+				82C47C75289872A7000A31B4 /* NetworkManager.swift in Sources */,
+				82C47C77289872C4000A31B4 /* AppAPI.swift in Sources */,
+				82C47C7D289873E1000A31B4 /* AppButton.swift in Sources */,
 				82E4DE3028984D9F00B118F1 /* HomeViewController.swift in Sources */,
 				82E4DE2C28984D9F00B118F1 /* AppDelegate.swift in Sources */,
 				82E4DE2E28984D9F00B118F1 /* SceneDelegate.swift in Sources */,
