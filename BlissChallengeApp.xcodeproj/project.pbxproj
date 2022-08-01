@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CC2EA67CE5875B39AAE5D93 /* Pods_BlissChallengeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC50DE8220B1D2272B8FEC8 /* Pods_BlissChallengeApp.framework */; };
 		82E4DE2C28984D9F00B118F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE2B28984D9F00B118F1 /* AppDelegate.swift */; };
 		82E4DE2E28984D9F00B118F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE2D28984D9F00B118F1 /* SceneDelegate.swift */; };
-		82E4DE3028984D9F00B118F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE2F28984D9F00B118F1 /* ViewController.swift */; };
+		82E4DE3028984D9F00B118F1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE2F28984D9F00B118F1 /* HomeViewController.swift */; };
 		82E4DE3328984D9F00B118F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82E4DE3128984D9F00B118F1 /* Main.storyboard */; };
 		82E4DE3628984D9F00B118F1 /* BlissChallengeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82E4DE3428984D9F00B118F1 /* BlissChallengeApp.xcdatamodeld */; };
 		82E4DE3828984DA100B118F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82E4DE3728984DA100B118F1 /* Assets.xcassets */; };
@@ -17,15 +18,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23A2AF4D5D3C6ED8EF40F46B /* Pods-BlissChallengeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlissChallengeApp.debug.xcconfig"; path = "Target Support Files/Pods-BlissChallengeApp/Pods-BlissChallengeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5FC50DE8220B1D2272B8FEC8 /* Pods_BlissChallengeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlissChallengeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E4DE2828984D9F00B118F1 /* BlissChallengeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlissChallengeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E4DE2B28984D9F00B118F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82E4DE2D28984D9F00B118F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		82E4DE2F28984D9F00B118F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		82E4DE2F28984D9F00B118F1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		82E4DE3228984D9F00B118F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		82E4DE3528984D9F00B118F1 /* BlissChallengeApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BlissChallengeApp.xcdatamodel; sourceTree = "<group>"; };
 		82E4DE3728984DA100B118F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82E4DE3A28984DA100B118F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82E4DE3C28984DA100B118F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E59424D2AF76199D72517B21 /* Pods-BlissChallengeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlissChallengeApp.release.xcconfig"; path = "Target Support Files/Pods-BlissChallengeApp/Pods-BlissChallengeApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CC2EA67CE5875B39AAE5D93 /* Pods_BlissChallengeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +49,8 @@
 			children = (
 				82E4DE2A28984D9F00B118F1 /* BlissChallengeApp */,
 				82E4DE2928984D9F00B118F1 /* Products */,
+				B9612E5867803F8CA0450161 /* Pods */,
+				D4D3B0ACC308B6CEF5DFA3EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +65,65 @@
 		82E4DE2A28984D9F00B118F1 /* BlissChallengeApp */ = {
 			isa = PBXGroup;
 			children = (
-				82E4DE2B28984D9F00B118F1 /* AppDelegate.swift */,
-				82E4DE2D28984D9F00B118F1 /* SceneDelegate.swift */,
-				82E4DE2F28984D9F00B118F1 /* ViewController.swift */,
-				82E4DE3128984D9F00B118F1 /* Main.storyboard */,
-				82E4DE3728984DA100B118F1 /* Assets.xcassets */,
-				82E4DE3928984DA100B118F1 /* LaunchScreen.storyboard */,
+				82E4DE422898599A00B118F1 /* Delegates */,
+				82E4DE44289859C400B118F1 /* ViewControllers */,
+				82E4DE43289859B300B118F1 /* Views */,
+				82E4DE45289859D300B118F1 /* Common */,
 				82E4DE3C28984DA100B118F1 /* Info.plist */,
 				82E4DE3428984D9F00B118F1 /* BlissChallengeApp.xcdatamodeld */,
 			);
 			path = BlissChallengeApp;
+			sourceTree = "<group>";
+		};
+		82E4DE422898599A00B118F1 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				82E4DE2B28984D9F00B118F1 /* AppDelegate.swift */,
+				82E4DE2D28984D9F00B118F1 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		82E4DE43289859B300B118F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				82E4DE3128984D9F00B118F1 /* Main.storyboard */,
+				82E4DE3928984DA100B118F1 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		82E4DE44289859C400B118F1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				82E4DE2F28984D9F00B118F1 /* HomeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		82E4DE45289859D300B118F1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				82E4DE3728984DA100B118F1 /* Assets.xcassets */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B9612E5867803F8CA0450161 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23A2AF4D5D3C6ED8EF40F46B /* Pods-BlissChallengeApp.debug.xcconfig */,
+				E59424D2AF76199D72517B21 /* Pods-BlissChallengeApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D4D3B0ACC308B6CEF5DFA3EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5FC50DE8220B1D2272B8FEC8 /* Pods_BlissChallengeApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +133,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82E4DE3F28984DA100B118F1 /* Build configuration list for PBXNativeTarget "BlissChallengeApp" */;
 			buildPhases = (
+				E2384B8FAC646E2EB9309DC5 /* [CP] Check Pods Manifest.lock */,
 				82E4DE2428984D9F00B118F1 /* Sources */,
 				82E4DE2528984D9F00B118F1 /* Frameworks */,
 				82E4DE2628984D9F00B118F1 /* Resources */,
+				C18B47BFA3CCE51536388E58 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,12 +194,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C18B47BFA3CCE51536388E58 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlissChallengeApp/Pods-BlissChallengeApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlissChallengeApp/Pods-BlissChallengeApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BlissChallengeApp/Pods-BlissChallengeApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2384B8FAC646E2EB9309DC5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlissChallengeApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		82E4DE2428984D9F00B118F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82E4DE3028984D9F00B118F1 /* ViewController.swift in Sources */,
+				82E4DE3028984D9F00B118F1 /* HomeViewController.swift in Sources */,
 				82E4DE2C28984D9F00B118F1 /* AppDelegate.swift in Sources */,
 				82E4DE2E28984D9F00B118F1 /* SceneDelegate.swift in Sources */,
 				82E4DE3628984D9F00B118F1 /* BlissChallengeApp.xcdatamodeld in Sources */,
@@ -286,6 +386,7 @@
 		};
 		82E4DE4028984DA100B118F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23A2AF4D5D3C6ED8EF40F46B /* Pods-BlissChallengeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -314,6 +415,7 @@
 		};
 		82E4DE4128984DA100B118F1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E59424D2AF76199D72517B21 /* Pods-BlissChallengeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
