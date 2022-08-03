@@ -12,20 +12,21 @@ class NetworkManager {
     static let shared = NetworkManager()
     let provider = MoyaProvider<AppAPI>()
     
-    func fetchEmojis(completion: @escaping (Emojis) -> ()){
+    func fetchEmojis(completion: @escaping (Result<Emojis, Error>) -> Void){
         provider.request(.emojis) { result in
             switch result {
             case .success(let response):
                 do {
                     let results = try JSONDecoder().decode(Emojis.self, from: response.data)
-                    print("here is the result of emoji \(results)")
-                    completion(results)
+//                    print("here is the result of emoji \(results)")
+                    completion(.success(results))
                 } catch let err {
                     print(err)
                 }
                 
             case .failure(let error):
                 print(error.localizedDescription)
+                completion(.failure(error))
             }
         }
     }
