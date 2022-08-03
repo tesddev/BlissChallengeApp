@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CC2EA67CE5875B39AAE5D93 /* Pods_BlissChallengeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC50DE8220B1D2272B8FEC8 /* Pods_BlissChallengeApp.framework */; };
+		827F968B289AFD6A00813828 /* PersistentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827F968A289AFD6A00813828 /* PersistentViewModel.swift */; };
 		82C47C72289860D7000A31B4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C71289860D6000A31B4 /* Helpers.swift */; };
 		82C47C75289872A7000A31B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C74289872A7000A31B4 /* NetworkManager.swift */; };
 		82C47C77289872C4000A31B4 /* AppAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C76289872C4000A31B4 /* AppAPI.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		23A2AF4D5D3C6ED8EF40F46B /* Pods-BlissChallengeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlissChallengeApp.debug.xcconfig"; path = "Target Support Files/Pods-BlissChallengeApp/Pods-BlissChallengeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5FC50DE8220B1D2272B8FEC8 /* Pods_BlissChallengeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlissChallengeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		827F968A289AFD6A00813828 /* PersistentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentViewModel.swift; sourceTree = "<group>"; };
 		82C47C71289860D6000A31B4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		82C47C74289872A7000A31B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		82C47C76289872C4000A31B4 /* AppAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAPI.swift; sourceTree = "<group>"; };
@@ -60,6 +62,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		827F9689289AFD5100813828 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				827F968A289AFD6A00813828 /* PersistentViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		82C47C7328987275000A31B4 /* NetworkManagers */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 		82E4DE2A28984D9F00B118F1 /* BlissChallengeApp */ = {
 			isa = PBXGroup;
 			children = (
+				827F9689289AFD5100813828 /* ViewModels */,
 				82C47C912899CDD7000A31B4 /* CoreDataFiles */,
 				82C47C8B2899814C000A31B4 /* RealmClasses */,
 				82C47C7B289873C5000A31B4 /* Reusables */,
@@ -307,6 +318,7 @@
 			files = (
 				82C47C7A2898730F000A31B4 /* EmojiModel.swift in Sources */,
 				82C47C972899CE92000A31B4 /* EmojiURL+CoreDataProperties.swift in Sources */,
+				827F968B289AFD6A00813828 /* PersistentViewModel.swift in Sources */,
 				82C47C75289872A7000A31B4 /* NetworkManager.swift in Sources */,
 				82C47C77289872C4000A31B4 /* AppAPI.swift in Sources */,
 				82C47C7D289873E1000A31B4 /* AppButton.swift in Sources */,

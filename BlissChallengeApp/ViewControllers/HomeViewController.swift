@@ -9,64 +9,54 @@ import UIKit
 import CoreData
 import RealmSwift
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController {
     
     let userDefaults = UserDefaults.standard
-    var persistedEmojiURLs: [EmojiURL]?
-    
-    private var emojiDetails = Emojis()
-    private var viewModels = [URLTableViewCellViewModel]()
     private var persistentVM = [PersistentViewModel]()
-    
-    
-    var emojiURLs: [String] = []
-    var emojiURLsArrayForUD: [String] = []
+    var emojiURLsArray: [String] = []
     
     lazy var getEmojiButton: AppButton = {
         let button = AppButton()
-        button.setTitle("Get Emoji", for: .normal)
+        button.setTitle("RANDOM EMOJI", for: .normal)
         button.addTarget(self, action: #selector(didTapGetEmojiButton), for: .touchUpInside)
         return button
     }()
     
-    var tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = .red
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        return table
+    let emojiImageView: UIImageView = {
+        let imageView = UIImageView(frame: CGRect())
+        imageView.image = UIImage(systemName: "house")
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let UDEmojis = userDefaults.object(forKey: "userDefaultsEmojiDictionary")
-        print("here is UD 1 emojis - \(String(describing: UDEmojis))")
         view.backgroundColor = Constants.AppColors.backgroundColor
-        tableView.dataSource = self
-        tableView.delegate = self
         constraintViews()
-        setupTableView()
-        
+        populateDataFromPersistenceOrAPI()
+    }
+    
+    func populateDataFromPersistenceOrAPI(){
+        let UDEmojis = userDefaults.object(forKey: "userDefaultsEmojiDictionary")
         if let UDEmojis = UDEmojis {
-            self.emojiURLsArrayForUD = UDEmojis as! [String]
+            self.emojiURLsArray = UDEmojis as! [String]
             
-            self.persistentVM = ((emojiURLsArrayForUD).compactMap({
+            self.persistentVM = ((emojiURLsArray).compactMap({
                 PersistentViewModel(
                     url: $0
                 )
             }))
-            tableView.reloadData()
+            displayRandomEmoji()
         } else {
-            populateTableViewFromAPI()
+            fetchEmojisFromAPI()
         }
-        print("here is emoji test array - \(self.emojiURLsArrayForUD)")
     }
     
-    func populateTableViewFromAPI() {
+    func fetchEmojisFromAPI() {
         NetworkManager.shared.fetchEmojis { [weak self] data in
             switch data {
             case .success(let emojis):
-                self?.emojiDetails = emojis
-                
                 // Create and Write Dictionary
                 let dictionaryValues = Array(emojis.values)
                 
@@ -77,9 +67,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 })
                 
                 self?.userDefaults.set(dictionaryValues, forKey: "userDefaultsEmojiDictionary")
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
                 
             case .failure(let error):
                 print("The error is \(error.localizedDescription)")
@@ -87,59 +74,39 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    
-    func setupTableView() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: getEmojiButton.bottomAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    func displayRandomEmoji(){
+        let array = persistentVM
+        let randomElement = array.randomElement()!
+        
+        let emojiURL = randomElement.url
+        let url = URL(string: emojiURL)!
+        if let data = try? Data(contentsOf: url) {
+            DispatchQueue.main.async {
+                // Create Image and Update Image View
+                print("here is the data \(data)")
+                self.emojiImageView.image = UIImage(data: data)
+            }
+        }
     }
     
     func constraintViews() {
         view.addSubview(getEmojiButton)
-        view.addSubview(tableView)
+        view.addSubview(emojiImageView)
         
         NSLayoutConstraint.activate([
             getEmojiButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             getEmojiButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
             getEmojiButton.heightAnchor.constraint(equalToConstant: 50),
-            getEmojiButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            getEmojiButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            
+            emojiImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+            emojiImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emojiImageView.widthAnchor.constraint(equalToConstant: 200),
+            emojiImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
     
     @objc func didTapGetEmojiButton() {
-        populateTableViewFromAPI()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return persistentVM.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = persistentVM[indexPath.row].url
-        return cell ?? UITableViewCell()
-    }
-}
-
-class URLTableViewCellViewModel {
-    // MARK: - Properties
-    let url: String
-    init(
-        url: String
-    ){
-        self.url = url
-    }
-}
-
-class PersistentViewModel {
-    // MARK: - Properties
-    let url: String
-    init(
-        url: String
-    ){
-        self.url = url
+        displayRandomEmoji()
     }
 }
