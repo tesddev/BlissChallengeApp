@@ -9,8 +9,10 @@ import UIKit
 
 class EmojiListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var emojiArray = [String]()
+    var constantEmojiViewModel = [PersistentViewModel]()
     var viewModel = [PersistentViewModel]()
+    
+    var refreshControl: UIRefreshControl?
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -24,6 +26,7 @@ class EmojiListViewController: UIViewController, UICollectionViewDelegate, UICol
         collectionView.frame = view.bounds
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = Constants.AppColors.backgroundColor
+        collectionView.alwaysBounceVertical = true
         return collectionView
     }()
 
@@ -32,12 +35,31 @@ class EmojiListViewController: UIViewController, UICollectionViewDelegate, UICol
         view.backgroundColor = .red
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
+        constantEmojiViewModel = viewModel
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.addSubview(refreshControl ?? UIRefreshControl())
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        self.viewModel = self.constantEmojiViewModel
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.refreshControl?.endRefreshing()
+        }
+        
     }
     
     // MARK: - ColllectionView Delegate and data source stubs
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.count
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.viewModel.remove(at: indexPath.row)
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
