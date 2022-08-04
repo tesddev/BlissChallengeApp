@@ -22,6 +22,13 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    lazy var emojiListButton: AppButton = {
+        let button = AppButton()
+        button.setTitle("Emoji List", for: .normal)
+        button.addTarget(self, action: #selector(didTapEmojiListButton), for: .touchUpInside)
+        return button
+    }()
+    
     let emojiImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect())
         imageView.image = UIImage(systemName: "house")
@@ -77,13 +84,11 @@ class HomeViewController: UIViewController {
     func displayRandomEmoji(){
         let array = persistentVM
         let randomElement = array.randomElement()!
-        
         let emojiURL = randomElement.url
         let url = URL(string: emojiURL)!
         if let data = try? Data(contentsOf: url) {
             DispatchQueue.main.async {
                 // Create Image and Update Image View
-                print("here is the data \(data)")
                 self.emojiImageView.image = UIImage(data: data)
             }
         }
@@ -92,6 +97,7 @@ class HomeViewController: UIViewController {
     func constraintViews() {
         view.addSubview(getEmojiButton)
         view.addSubview(emojiImageView)
+        view.addSubview(emojiListButton)
         
         NSLayoutConstraint.activate([
             getEmojiButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -102,11 +108,21 @@ class HomeViewController: UIViewController {
             emojiImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
             emojiImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emojiImageView.widthAnchor.constraint(equalToConstant: 200),
-            emojiImageView.heightAnchor.constraint(equalToConstant: 200)
+            emojiImageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            emojiListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emojiListButton.topAnchor.constraint(equalTo: getEmojiButton.bottomAnchor, constant: 20),
+            emojiListButton.heightAnchor.constraint(equalToConstant: 50),
+            emojiListButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
         ])
     }
     
     @objc func didTapGetEmojiButton() {
         displayRandomEmoji()
+    }
+    @objc func didTapEmojiListButton() {
+        let vc = EmojiListViewController()
+        vc.viewModel = persistentVM
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
