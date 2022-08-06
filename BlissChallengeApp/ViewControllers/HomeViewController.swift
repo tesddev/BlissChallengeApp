@@ -65,20 +65,36 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    lazy var avatarListButton: AppButton = {
+        let button = AppButton()
+        button.setTitle("Avatar List", for: .normal)
+        button.addTarget(self, action: #selector(didTapAvatarListButton), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.AppColors.backgroundColor
         constraintViews()
         DispatchQueue.main.async {
             self.populateDataFromPersistenceOrAPI()
+            self.updateSearchedResults()
         }
         searchBar.delegate = self
-        guard let searchedAvatarURL = userDefaults.object(forKey: "UDArrayOfSearchedAvatarsURL"), let searchedAvatarName =  userDefaults.object(forKey: "UDArrayOfSearchedAvatarsName") else {
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateSearchedResults()
+    }
+    
+    func updateSearchedResults(){
+        guard let searchedAvatarURL = self.userDefaults.object(forKey: "UDArrayOfSearchedAvatarsURL"), let searchedAvatarName =  userDefaults.object(forKey: "UDArrayOfSearchedAvatarsName") else {
             print("error full ground")
             return
         }
-        arrayOfSearchedAvatarURL = searchedAvatarURL as! [String]
-        arrayOfSearchedAvatarName = searchedAvatarName as! [String]
+        self.arrayOfSearchedAvatarURL = searchedAvatarURL as! [String]
+        self.arrayOfSearchedAvatarName = searchedAvatarName as! [String]
+        print("we got here", arrayOfSearchedAvatarURL.count, arrayOfSearchedAvatarName.count)
     }
     
     func populateDataFromPersistenceOrAPI(){
@@ -138,6 +154,7 @@ class HomeViewController: UIViewController {
         view.addSubview(searchView)
         view.addSubview(searchButton)
         searchView.addSubview(searchBar)
+        view.addSubview(avatarListButton)
         
         NSLayoutConstraint.activate([
             getEmojiButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -168,7 +185,12 @@ class HomeViewController: UIViewController {
             searchBar.centerXAnchor.constraint(equalTo: searchView.centerXAnchor),
             searchBar.widthAnchor.constraint(equalTo: searchView.widthAnchor, multiplier: 0.9),
             searchBar.heightAnchor.constraint(equalToConstant: 40),
-            searchBar.centerYAnchor.constraint(equalTo: searchView.centerYAnchor)
+            searchBar.centerYAnchor.constraint(equalTo: searchView.centerYAnchor),
+            
+            avatarListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            avatarListButton.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 20),
+            avatarListButton.heightAnchor.constraint(equalToConstant: 50),
+            avatarListButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
         ])
     }
     
@@ -211,6 +233,11 @@ class HomeViewController: UIViewController {
         } else {
 
         }
+    }
+    
+    @objc func didTapAvatarListButton() {
+        let vc = AvatarListViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
