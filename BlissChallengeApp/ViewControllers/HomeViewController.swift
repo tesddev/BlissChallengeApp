@@ -44,6 +44,20 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    var arrayOfSearchedAvatarURL = [String]()
+    var arrayOfSearchedAvatarName = [String]()
+    
+    private let searchBar: UISearchBar = {
+        let controller = UISearchBar()
+        controller.searchBarStyle = .minimal
+        controller.translatesAutoresizingMaskIntoConstraints = false
+        controller.backgroundColor = .white
+        controller.layer.cornerRadius = 10
+        controller.barTintColor = .white
+        controller.autocapitalizationType = .none
+        return controller
+    }()
+    
     lazy var searchButton: AppButton = {
         let button = AppButton()
         button.setTitle("SEARCH", for: .normal)
@@ -55,7 +69,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Constants.AppColors.backgroundColor
         constraintViews()
-        populateDataFromPersistenceOrAPI()
+        DispatchQueue.main.async {
+            self.populateDataFromPersistenceOrAPI()
+        }
+        searchBar.delegate = self
+        guard let searchedAvatarURL = userDefaults.object(forKey: "UDArrayOfSearchedAvatarsURL"), let searchedAvatarName =  userDefaults.object(forKey: "UDArrayOfSearchedAvatarsName") else {
+            print("error full ground")
+            return
+        }
+        arrayOfSearchedAvatarURL = searchedAvatarURL as! [String]
+        arrayOfSearchedAvatarName = searchedAvatarName as! [String]
     }
     
     func populateDataFromPersistenceOrAPI(){
@@ -102,7 +125,7 @@ class HomeViewController: UIViewController {
         let url = URL(string: emojiURL)!
         if let data = try? Data(contentsOf: url) {
             DispatchQueue.main.async {
-                // Create Image and Update Image View
+                /// Create Image and Update Image View
                 self.emojiImageView.image = UIImage(data: data)
             }
         }
@@ -114,6 +137,7 @@ class HomeViewController: UIViewController {
         view.addSubview(emojiListButton)
         view.addSubview(searchView)
         view.addSubview(searchButton)
+        searchView.addSubview(searchBar)
         
         NSLayoutConstraint.activate([
             getEmojiButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -140,6 +164,11 @@ class HomeViewController: UIViewController {
             searchButton.trailingAnchor.constraint(equalTo: emojiListButton.trailingAnchor),
             searchButton.heightAnchor.constraint(equalTo: searchView.heightAnchor),
             searchButton.topAnchor.constraint(equalTo: searchView.topAnchor),
+            
+            searchBar.centerXAnchor.constraint(equalTo: searchView.centerXAnchor),
+            searchBar.widthAnchor.constraint(equalTo: searchView.widthAnchor, multiplier: 0.9),
+            searchBar.heightAnchor.constraint(equalToConstant: 40),
+            searchBar.centerYAnchor.constraint(equalTo: searchView.centerYAnchor)
         ])
     }
     
@@ -152,7 +181,60 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func didTapSearchButton() {
-        displayRandomEmoji()
+    @objc func didTapSearchButton(){
+        guard let text = searchBar.text, searchBar.text!.count > 0 else {
+            showSimpleAlert("", message: "Input an avatar name to search")
+            return
+        }
+        var availability = false
+        
+        for x in self.arrayOfSearchedAvatarName {
+            if x.contains(text){
+                showSimpleAlert("already exists", message: "")
+                availability = true
+                break
+            }
+        }
+        
+        if availability == false {
+            NetworkManager.shared.fetchSearchedEmojis(username: text) { result in
+                
+                self.arrayOfSearchedAvatarURL.append(result.avatarURL)
+                self.arrayOfSearchedAvatarName.append(result.login)
+                print(self.arrayOfSearchedAvatarURL.count, self.arrayOfSearchedAvatarName.count)
+                self.userDefaults.set(self.arrayOfSearchedAvatarName, forKey: "UDArrayOfSearchedAvatarsName")
+                self.userDefaults.set(self.arrayOfSearchedAvatarURL, forKey: "UDArrayOfSearchedAvatarsURL")
+                
+            } errorCompletion: { err in
+                self.showSimpleAlert("Data Not Found", message: "Try another string")
+            }
+        } else {
+
+        }
+    }
+}
+
+extension HomeViewController: UISearchBarDelegate{
+    //MARK: UISearchbar delegate
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        print(searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    // MARK: Helper Function
+    
+    func showSimpleAlert(_ title:String, message:String?) {
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler:nil)
+        alertView.addAction(okAction)
+        self.present(alertView, animated: true, completion: nil)
     }
 }
