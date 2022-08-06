@@ -48,6 +48,17 @@ class EmojiCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    public func configureCollectionView(with url: String) {
+//        let urlString = viewModel.avatarURL
+        let url = URL(string: url)!
+        if let data = try? Data(contentsOf: url) {
+            DispatchQueue.main.async {
+                // Create Image and Update Image View
+                self.emojiImageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
     override func prepareForReuse() {
         emojiImageView.image = nil
     }

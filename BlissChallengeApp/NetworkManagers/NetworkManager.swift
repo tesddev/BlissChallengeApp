@@ -18,7 +18,6 @@ class NetworkManager {
             case .success(let response):
                 do {
                     let results = try JSONDecoder().decode(Emojis.self, from: response.data)
-//                    print("here is the result of emoji \(results)")
                     completion(.success(results))
                 } catch let err {
                     print(err)
@@ -30,26 +29,25 @@ class NetworkManager {
             }
         }
     }
-//    func fetchSearchedEmojis(username: String, completion: @escaping (EmojiSearchModel) -> (), errorCompletion: @escaping (APIError) -> ()){
-//        provider.request(.searchedEmojis(username: username)) { result in
-//            switch result {
-//            case .success(let response):
-//                do {
-//                    let results = try JSONDecoder().decode(EmojiSearchModel.self, from: response.data)
-//                    print("here is the result of emojiSearch \(results)")
-//                    completion(results)
-//                } catch let err {
-//                    print(err)
-//                    print("no data 1")
-//                    errorCompletion(.dataNotFound)
-//                }
-//                
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//                print("no data")
-//            }
-//        }
-//    }
+    
+    func fetchSearchedEmojis(username: String, completion: @escaping (EmojiSearchModel) -> (), errorCompletion: @escaping (APIError) -> ()){
+        provider.request(.searchedEmojis(username: username)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let results = try JSONDecoder().decode(EmojiSearchModel.self, from: response.data)
+                    completion(results)
+                } catch let err {
+                    print(err)
+                    errorCompletion(.dataNotFound)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
 //    func fetchAppleRepos(page: Int, size: Int, completion: @escaping (AppleURL) -> ()){
 //        provider.request(.appleRepos(page: page, size: size)) { result in
 //            switch result {
