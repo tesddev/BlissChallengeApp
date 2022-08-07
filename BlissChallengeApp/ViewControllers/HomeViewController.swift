@@ -256,8 +256,8 @@ class HomeViewController: UIViewController {
     
     @objc func didTapAppleReposButton() {
         print("apple repos")
-//        let vc = AvatarListViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = AppleReposViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
