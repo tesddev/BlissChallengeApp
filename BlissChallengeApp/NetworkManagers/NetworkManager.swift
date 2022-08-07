@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  MoyaTestProject
 //
-//  Created by GIGL iOS on 31/07/2022.
+//  Created by TES on 31/07/2022.
 //
 
 import Foundation

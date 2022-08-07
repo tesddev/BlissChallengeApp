@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  BlissChallengeApp
 //
-//  Created by GIGL iOS on 01/08/2022.
+//  Created by TES on 01/08/2022.
 //
 
 import UIKit
@@ -255,7 +255,6 @@ class HomeViewController: UIViewController {
     }
     
     @objc func didTapAppleReposButton() {
-        print("apple repos")
         let vc = AppleReposViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
