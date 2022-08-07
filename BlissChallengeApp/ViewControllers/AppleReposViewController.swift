@@ -34,11 +34,15 @@ class AppleReposViewController: UIViewController, UITableViewDataSource, UITable
             switch element {
             case .success(let urls):
                 let arrayOfURLs = Array(urls)
-                self?.repos = arrayOfURLs.compactMap({ data in
+                self?.reusableArray = arrayOfURLs.compactMap({ data in
                     AppleURLInput(
                         url: data.name
                     )
                 })
+                let reusableArr = self?.reusableArray[...9]
+                self?.reusableArray.removeSubrange(...9)
+                guard reusableArr != nil else { return }
+                self?.repos.append(contentsOf: reusableArr!)
                 DispatchQueue.main.async {
                     self?.appleReposTableView.reloadData()
                 }
