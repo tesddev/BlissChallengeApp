@@ -264,10 +264,6 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UISearchBarDelegate{
     //MARK: UISearchbar delegate
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        print(searchText)
-    }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }

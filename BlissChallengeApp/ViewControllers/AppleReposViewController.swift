@@ -9,6 +9,7 @@ import UIKit
 
 class AppleReposViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var repos = [AppleURLInput]()
     public var appleReposTableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = Constants.AppColors.backgroundColor
@@ -24,17 +25,41 @@ class AppleReposViewController: UIViewController, UITableViewDataSource, UITable
         appleReposTableView.delegate = self
         view.addSubview(appleReposTableView)
         appleReposTableView.frame = view.bounds
+        appleReposTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.barTintColor = Constants.AppColors.backgroundColor
+        NetworkManager.shared.getAppleRepos(page: 1, size: 10) { element in
+            print(element)
+            switch element {
+            case .success(let urls):
+                let arrayOfURLs = Array(urls)
+                self.repos = arrayOfURLs.compactMap({ elem in
+                    AppleURLInput(
+                        url: elem.name
+                    )
+                })
+                print(self.repos.count)
+                print("here is \(self.repos[0].url)")
+                DispatchQueue.main.async {
+                    self.appleReposTableView.reloadData()
+                }
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return repos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         cell?.backgroundColor = Constants.AppColors.backgroundColor
         cell?.textLabel?.textColor = .white
-        cell?.textLabel?.text = "Tes"
+        cell?.textLabel?.text = self.repos[indexPath.row].url
         return cell ?? UITableViewCell()
     }
 }
