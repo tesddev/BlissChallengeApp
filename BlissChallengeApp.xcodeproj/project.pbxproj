@@ -14,6 +14,7 @@
 		827F969A289ECF8100813828 /* EmojiSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827F9699289ECF8000813828 /* EmojiSearchModel.swift */; };
 		827F969C289ED92200813828 /* SearchedEmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827F969B289ED92200813828 /* SearchedEmojiViewModel.swift */; };
 		827F969F289F1ADD00813828 /* AvatarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827F969E289F1ADD00813828 /* AvatarListViewController.swift */; };
+		827F96A328A0002C00813828 /* AppleReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827F96A228A0002B00813828 /* AppleReposViewController.swift */; };
 		82C47C72289860D7000A31B4 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C71289860D6000A31B4 /* Helpers.swift */; };
 		82C47C75289872A7000A31B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C74289872A7000A31B4 /* NetworkManager.swift */; };
 		82C47C77289872C4000A31B4 /* AppAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C47C76289872C4000A31B4 /* AppAPI.swift */; };
@@ -40,6 +41,7 @@
 		827F9699289ECF8000813828 /* EmojiSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearchModel.swift; sourceTree = "<group>"; };
 		827F969B289ED92200813828 /* SearchedEmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedEmojiViewModel.swift; sourceTree = "<group>"; };
 		827F969E289F1ADD00813828 /* AvatarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AvatarListViewController.swift; path = BlissChallengeApp/ViewControllers/AvatarListViewController.swift; sourceTree = SOURCE_ROOT; };
+		827F96A228A0002B00813828 /* AppleReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleReposViewController.swift; sourceTree = "<group>"; };
 		82C47C71289860D6000A31B4 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		82C47C74289872A7000A31B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		82C47C76289872C4000A31B4 /* AppAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAPI.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				82E4DE2F28984D9F00B118F1 /* HomeViewController.swift */,
 				827F968C289B014600813828 /* EmojiListViewController.swift */,
 				827F969E289F1ADD00813828 /* AvatarListViewController.swift */,
+				827F96A228A0002B00813828 /* AppleReposViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				827F96A328A0002C00813828 /* AppleReposViewController.swift in Sources */,
 				82C47C7A2898730F000A31B4 /* EmojiModel.swift in Sources */,
 				82C47C972899CE92000A31B4 /* EmojiURL+CoreDataProperties.swift in Sources */,
 				827F968B289AFD6A00813828 /* PersistentViewModel.swift in Sources */,
