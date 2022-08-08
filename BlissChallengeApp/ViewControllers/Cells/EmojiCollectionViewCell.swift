@@ -2,7 +2,7 @@
 //  EmojiCollectionViewCell.swift
 //  BlissChallengeApp
 //
-//  Created by GIGL iOS on 04/08/2022.
+//  Created by TES on 04/08/2022.
 //
 
 import UIKit
@@ -49,7 +49,6 @@ class EmojiCollectionViewCell: UICollectionViewCell {
     }
     
     public func configureCollectionView(with url: String) {
-//        let urlString = viewModel.avatarURL
         let url = URL(string: url)!
         if let data = try? Data(contentsOf: url) {
             DispatchQueue.main.async {

@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  BlissChallengeApp
 //
-//  Created by GIGL iOS on 01/08/2022.
+//  Created by TES on 01/08/2022.
 //
 
 import UIKit
@@ -55,6 +55,8 @@ class HomeViewController: UIViewController {
         controller.layer.cornerRadius = 10
         controller.barTintColor = .white
         controller.autocapitalizationType = .none
+        controller.searchTextField.textColor = .black
+        controller.searchTextField.leftView?.tintColor = .lightGray
         return controller
     }()
     
@@ -72,8 +74,17 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    lazy var appleReposButton: AppButton = {
+        let button = AppButton()
+        button.setTitle("Apple Repos", for: .normal)
+        button.addTarget(self, action: #selector(didTapAppleReposButton), for: .touchUpInside)
+        return button
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.barTintColor = Constants.AppColors.backgroundColor
         view.backgroundColor = Constants.AppColors.backgroundColor
         constraintViews()
         DispatchQueue.main.async {
@@ -89,12 +100,10 @@ class HomeViewController: UIViewController {
     
     func updateSearchedResults(){
         guard let searchedAvatarURL = self.userDefaults.object(forKey: "UDArrayOfSearchedAvatarsURL"), let searchedAvatarName =  userDefaults.object(forKey: "UDArrayOfSearchedAvatarsName") else {
-            print("error full ground")
             return
         }
         self.arrayOfSearchedAvatarURL = searchedAvatarURL as! [String]
         self.arrayOfSearchedAvatarName = searchedAvatarName as! [String]
-        print("we got here", arrayOfSearchedAvatarURL.count, arrayOfSearchedAvatarName.count)
     }
     
     func populateDataFromPersistenceOrAPI(){
@@ -128,8 +137,8 @@ class HomeViewController: UIViewController {
                 
                 self?.userDefaults.set(dictionaryValues, forKey: "userDefaultsEmojiDictionary")
                 
-            case .failure(let error):
-                print("The error is \(error.localizedDescription)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -155,6 +164,7 @@ class HomeViewController: UIViewController {
         view.addSubview(searchButton)
         searchView.addSubview(searchBar)
         view.addSubview(avatarListButton)
+        view.addSubview(appleReposButton)
         
         NSLayoutConstraint.activate([
             getEmojiButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -162,10 +172,10 @@ class HomeViewController: UIViewController {
             getEmojiButton.heightAnchor.constraint(equalToConstant: 50),
             getEmojiButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             
-            emojiImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
+            emojiImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             emojiImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emojiImageView.widthAnchor.constraint(equalToConstant: 200),
-            emojiImageView.heightAnchor.constraint(equalToConstant: 200),
+            emojiImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            emojiImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
             
             emojiListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emojiListButton.topAnchor.constraint(equalTo: getEmojiButton.bottomAnchor, constant: 20),
@@ -191,6 +201,11 @@ class HomeViewController: UIViewController {
             avatarListButton.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 20),
             avatarListButton.heightAnchor.constraint(equalToConstant: 50),
             avatarListButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            
+            appleReposButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            appleReposButton.topAnchor.constraint(equalTo: avatarListButton.bottomAnchor, constant: 20),
+            appleReposButton.heightAnchor.constraint(equalToConstant: 50),
+            appleReposButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
         ])
     }
     
@@ -223,7 +238,6 @@ class HomeViewController: UIViewController {
                 
                 self.arrayOfSearchedAvatarURL.append(result.avatarURL)
                 self.arrayOfSearchedAvatarName.append(result.login)
-                print(self.arrayOfSearchedAvatarURL.count, self.arrayOfSearchedAvatarName.count)
                 self.userDefaults.set(self.arrayOfSearchedAvatarName, forKey: "UDArrayOfSearchedAvatarsName")
                 self.userDefaults.set(self.arrayOfSearchedAvatarURL, forKey: "UDArrayOfSearchedAvatarsURL")
                 
@@ -239,14 +253,15 @@ class HomeViewController: UIViewController {
         let vc = AvatarListViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func didTapAppleReposButton() {
+        let vc = AppleReposViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate{
     //MARK: UISearchbar delegate
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        print(searchText)
-    }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()

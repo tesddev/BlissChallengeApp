@@ -2,7 +2,7 @@
 //  EmojiListViewController.swift
 //  BlissChallengeApp
 //
-//  Created by GIGL iOS on 03/08/2022.
+//  Created by TES on 03/08/2022.
 //
 
 import UIKit
@@ -38,7 +38,6 @@ class AvatarListViewController: UIViewController, UICollectionViewDelegate, UICo
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
         guard let searchedAvatarURL = userDefaults.object(forKey: "UDArrayOfSearchedAvatarsURL"), let searchedAvatarName =  userDefaults.object(forKey: "UDArrayOfSearchedAvatarsName") else {
-            print("error full ground")
             return
         }
         arrayOfSearchedAvatarURL = searchedAvatarURL as! [String]
@@ -49,7 +48,6 @@ class AvatarListViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: - ColllectionView Delegate and data source stubs
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         arrayOfSearchedAvatarURL.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
