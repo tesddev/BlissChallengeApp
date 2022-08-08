@@ -19,12 +19,11 @@ class NetworkManager {
                 do {
                     let results = try JSONDecoder().decode(Emojis.self, from: response.data)
                     completion(.success(results))
-                } catch let err {
-                    print(err)
+                } catch _ {
+                    break
                 }
                 
             case .failure(let error):
-                print(error.localizedDescription)
                 completion(.failure(error))
             }
         }
@@ -37,13 +36,12 @@ class NetworkManager {
                 do {
                     let results = try JSONDecoder().decode(EmojiSearchModel.self, from: response.data)
                     completion(results)
-                } catch let err {
-                    print(err)
+                } catch _ {
                     errorCompletion(.dataNotFound)
                 }
                 
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure(_):
+                break
             }
         }
     }
@@ -62,8 +60,7 @@ class NetworkManager {
 
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-        } catch let error {
-            print(error.localizedDescription)
+        } catch _ {
             return
         }
         

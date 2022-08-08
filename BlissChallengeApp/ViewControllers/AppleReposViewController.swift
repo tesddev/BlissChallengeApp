@@ -46,37 +46,14 @@ class AppleReposViewController: UIViewController, UITableViewDataSource, UITable
                 DispatchQueue.main.async {
                     self?.appleReposTableView.reloadData()
                 }
-            case .failure(let err):
-                print(err)
+            case .failure(_):
+                break
             }
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.barTintColor = Constants.AppColors.backgroundColor
         populateTable()
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repos.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.backgroundColor = Constants.AppColors.backgroundColor
-        cell?.textLabel?.textColor = .white
-        cell?.textLabel?.text = self.repos[indexPath.row].url
-        cell?.selectionStyle = .none
-        return cell ?? UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var page = 2
-        let lastElement = self.repos.count - 1
-            if indexPath.row == lastElement {
-                // logic here
-                beginFetch(in: page)
-                page += 1
-            }
     }
     
     func beginFetch(in page: Int){
@@ -113,5 +90,28 @@ class AppleReposViewController: UIViewController, UITableViewDataSource, UITable
                 self.appleReposTableView.reloadData()
             }
         }
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return repos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        cell?.backgroundColor = Constants.AppColors.backgroundColor
+        cell?.textLabel?.textColor = .white
+        cell?.textLabel?.text = self.repos[indexPath.row].url
+        cell?.selectionStyle = .none
+        return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        var page = 2
+        let lastElement = self.repos.count - 1
+            if indexPath.row == lastElement {
+                // logic here
+                beginFetch(in: page)
+                page += 1
+            }
     }
 }

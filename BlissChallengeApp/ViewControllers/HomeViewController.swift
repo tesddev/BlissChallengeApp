@@ -84,6 +84,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.barTintColor = Constants.AppColors.backgroundColor
         view.backgroundColor = Constants.AppColors.backgroundColor
         constraintViews()
         DispatchQueue.main.async {
@@ -136,8 +137,8 @@ class HomeViewController: UIViewController {
                 
                 self?.userDefaults.set(dictionaryValues, forKey: "userDefaultsEmojiDictionary")
                 
-            case .failure(let error):
-                print("The error is \(error.localizedDescription)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -237,7 +238,6 @@ class HomeViewController: UIViewController {
                 
                 self.arrayOfSearchedAvatarURL.append(result.avatarURL)
                 self.arrayOfSearchedAvatarName.append(result.login)
-                print(self.arrayOfSearchedAvatarURL.count, self.arrayOfSearchedAvatarName.count)
                 self.userDefaults.set(self.arrayOfSearchedAvatarName, forKey: "UDArrayOfSearchedAvatarsName")
                 self.userDefaults.set(self.arrayOfSearchedAvatarURL, forKey: "UDArrayOfSearchedAvatarsURL")
                 
